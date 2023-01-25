@@ -55,8 +55,10 @@ spec:
         volumeMounts:
         - mountPath: /opt/armory/config
           name: volume-armory-agent-config
+        {{- /*
         - mountPath: /kubeconfigfiles
           name: volume-armory-agent-kubeconfigs
+        */}}
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
@@ -66,7 +68,9 @@ spec:
       - name: volume-armory-agent-config
         configMap:
           name: {{ .Release.Name | lower }}-config
+      {{- /*
       - name: volume-armory-agent-kubeconfigs
         secret:
           defaultMode: 420
           secretName: spin-secrets-remote
+      */}}
