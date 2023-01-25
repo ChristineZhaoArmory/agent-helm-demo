@@ -1,0 +1,18 @@
+apiVersion: v1
+data:
+  armory-agent.yaml: |
+    clouddriver:
+      grpc: {{ .Values.config.clouddriver.grpc }}
+      insecure: true
+    logging:
+      level: debug
+    kubernetes:
+      accounts:
+      - name: {{ .Values.config.kubernetes.accounts.name }}
+        kinds: []
+        omitKinds: []
+        kubeconfigFile: {{ .Values.config.kubernetes.accounts.kubeconfigFile }}
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name | lower }}-config
+  namespace: {{ .Release.Namespace }}
